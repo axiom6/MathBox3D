@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>MathBox.js</title>
+  <meta charset="utf-8">
+  <meta name="description" content="GIS with Leaflet">
+  <meta name="author" content="Tom Flaherty">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="reveal/css/reveal.css">
+  <link rel="stylesheet" href="reveal/css/theme/axiom.css" id="theme">
+  <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+  <style>
+    .center-cell { text-align:center!important; vertical-align:middle!important; }
+    .space-cell  { width:1em; }
+    .small-cell  { text-align:center!important; font-size:.65em!important; }
+     table tr    { line-height:36px!important; }
+  /*
+    .column50pc  { display:inline;  margin: 0 1em 0 1em; max-width:400px; }
+    .column30pc  { display:inline;  margin: 0 1em 0 1em; width:30%; }
+    .left-cell   { text-align:left!important;   vertical-align:middle!important; }
+    .right-cell  { text-align:right!important; vertical-align:middle!important; }
+    .left-top    { position:absolute; left:0; top:-7em; width:auto; height:auto; }
+  */
+  </style>
+
+</head>
+
+<body>
+
+<div class="reveal">
+
+  <div class="slides">
+
+<section>
+  <h2>MathBox.js</h2>
+  <!--h4>Presentation-Quality Math with tQuery.js, Three.js and WebGL</h4-->
+  <img src="img/bezier-surface.png" alt="Bezier surface"/>
+  <p><small><a href="http://twitter.com/TheTomFlaherty">@TheTomFlaherty</a></small></p>
+</section>
+
+<section>
+  <a href="demos/bezier-surface/BezierSurface.html" style="font-size:1.5em;">First Demo Bezier Surface</a>
+  <h4></h4>
+  <h4>With the awesome MathBox Director and a great Script</h4>
+</section>
+
+<section>
+    <table>
+      <tr>
+        <td class="center-cell"><img src="img/WebGL.jpg" alt="WebGL"/></td>
+        <td class="space-cell"></td>
+        <td class="center-cell"><img src="img/threejs.png" alt="three.js"/></td>
+      </tr>
+      <tr>
+        <td class="center-cell"><div>OpenGL for HTML5 Canvas</div></td>
+        <td></td>
+        <td class="center-cell"><div>Harness WebGL Complexity </div></td>
+      </tr>
+      <tr>
+        <td class="small-cell"><div>HTML5:<a style="padding-top:3px;" href="http://bosatsu.net">Brian Sletten</a> June 18, 2012</div></td>
+        <td></td>
+        <td class="small-cell"><div>HTML5:<a style="padding-top:3px;" href="http://www.chandlerprall.com">Chandler Prall</a> /
+          <a style="padding-top:3px;"  href="http://chandlerprall.github.io/Physijs/">Physijs</a> Jan. 21, 2013</div></td>
+      </tr>
+      <tr>
+        <td class="center-cell"><a class="small-cell" href="http://www.khronos.org">http://www.khronos.org</a></td>
+        <td></td>
+        <td class="center-cell"><a class="small-cell" href="http://threejs.org">http://threejs.org</a></td>
+      </tr>
+
+      <tr>
+        <td class="center-cell"><img src="img/tquery.png"  alt="tquery"/></td>
+        <td></td>
+        <td class="center-cell"><img src="img/mathbox.png" alt="MathBox"/></td>
+      </tr>
+      <tr>
+        <td class="center-cell"><div>Fluidic API for Three.js</div></td>
+        <td></td>
+        <td class="center-cell"><div>Math Visualization</div></td>
+      </tr>
+      <tr>
+        <td class="small-cell"><a href="http://jetienne.com">created by Jerome Etienne</a></td>
+        <td></td>
+        <td class="small-cell"><a href="http://acko.net">created by Steven Wittens</a></td>
+      </tr>
+      <tr>
+        <td class="center-cell"><a class="small-cell" href="http://jeromeetienne.github.io/tquery">http://jeromeetienne.github.io/tquery</a></td>
+        <td></td>
+        <td class="center-cell"><a class="small-cell" href="https://github.com/unconed/MathBox.js">https://github.com/unconed/MathBox.js</a></td>
+      </tr>
+
+    </table>
+</section>
+
+
+<section>
+  <h3>Getting to Know</h3>
+  <div><img src="img/mathbox.png" alt="MathBox"/></div>
+  <ul>
+    <li><a href="http://acko.net/blog/making-mathbox">Making-mathbox</a></li>
+    <li><a href="http://acko.net/files/fullfrontal/fullfrontal/slides-net">Making things with Maths</a></li>
+    <li><a href="http://bit.ly/ZXIkGu">Full Frontal You Tube Video</a></li>
+    <li><a href="https://github.com/unconed/MathBox.js">GitHub</a></li>
+  </ul>
+</section>
+
+<section>
+  <h3>Three.js and MathBox.js</h3>
+  <p>MathBox sets up its scene within a Three.js scene</p>
+  <div><img src="img/architecture.png" alt="Architecture"/></div>
+</section>
+
+<section>
+  <h3>7 Steps to Coding a</h3>
+  <h3>MathBox Visualization</h3>
+</section>
+
+<section>
+  <h3>1. Load MathBox Shader Library</h3>
+  <h4>with an initMathBox() callback</h4>
+
+<pre class="javascript"><code  style="font-size:1em;">
+  DomReady.ready( function() {
+    ThreeBox.preload( ['MathBox.glsl.html'], initMathBox ); } );
+
+</code></pre>
+  <p class="small-cell">Due to single domain issues MathBox.glsl.html has to be in or below directory</p>
+  <p class="small-cell">In Chrome run with google-chrome  --allow-file-access-from-files</p>
+</section>
+
+<section>
+  <h3>2. Initialize MathBox and Start It</h3>
+<pre class="javascript"><code  style="font-size:1em;">
+  initMathBox = function() {
+    var mathbox = window.mathbox =  mathBox( {
+      controlClass:ThreeBox.OrbitControls, cameraControls:true,
+      cursor:true,  elementResize:true, fullscreen:true,
+      screenshot:true, stats:false, scale:1
+  } ).start();
+
+</code></pre>
+</section>
+
+<section>
+  <h3>3. Viewport</h3>
+<pre class="javascript"><code style="font-size:1.2em;">
+  mathbox
+   .viewport( { type:'cartesian', range:[[0,1],[0,1],[0,1]],
+                scale:[.7,.7,.7], polar:0 } )
+
+</code></pre>
+</section>
+
+<section>
+  <h3>4. Camera</h3>
+<pre class="javascript"><code style="font-size:1.4em;">
+  mathbox
+  .camera( { orbit:4, phi:τ/4-.5, theta:.7 } )
+
+</code></pre>
+</section>
+
+<section>
+  <h3>5. Grids</h3>
+<pre class="javascript"><code style="font-size:1em;">
+  mathbox
+  .grid( { axis:[0,1], color:0xa0a0a0, offset:[0,0,0], ticks:[10,10] } )
+  .grid( { axis:[1,2], color:0xa0a0a0, offset:[0,0,0], ticks:[10,10] } )
+  .grid( { axis:[0,2], color:0xa0a0a0, offset:[0,0,0], ticks:[10,10] } )
+
+</code></pre>
+</section>
+
+<section>
+  <h3>6. Intersecting Surface Content</h3>
+<pre class="javascript"><code style="font-size:1em; min-height:21em;">
+  mathbox
+  .surface( { shaded:true,  domain:[ [0,1], [0,1] ], n:[32,32],
+              expression:surfaceWaves, opacity:.999  } )
+  .surface( { shaded:false, domain:[ [0,1], [0,1] ], n:[ 2, 2],
+              expression:surfaceSlice, opacity:.5, color:0x20C050 } );
+
+  // Wavey sin cos surface
+  function surfaceWaves(x, y) {
+    return [x, 0.25 * ( Math.cos(x*10) + Math.cos(y*10) + 2 ), y]; }
+
+  // Horizontal slice
+  function surfaceSlice(x, y) {
+    var t = clock(1);
+    return  0.5 * ( Math.sin(t) + 1 ); }
+
+</code></pre>
+</section>
+
+<section>
+  <h3>7. Simple Clock Driven Animation</h3>
+<pre class="javascript"><code style="font-size:1em; min-height:10em;">
+  // Clock animation that starts when called by surfaceSlice().
+  var clocks = {};
+  window.clock = function (id) {
+    if (!clocks[id]) clocks[id] = +new Date();
+    return (+new Date() - clocks[id]) * .001;
+  };
+</code></pre>
+</section>
+
+<section>
+  <h3>MathBox Chained Togther</h3>
+  <h4>Courtesy of tQuery</h4>
+<pre class="javascript"><code style="font-size:1em; min-height:15em;">
+  mathbox
+  .viewport( { type:'cartesian', range:[[0,1], [0,1], [0,1]],
+               scale:[.7,.7,.7], polar:0 } )
+  .camera(   { orbit:4, phi:τ/4-.5, theta:.7 } )
+  .grid( { axis:[0,1], color:0xa0a0a0, offset:[0,0,0], ticks:[10,10] } )
+  .grid( { axis:[1,2], color:0xa0a0a0, offset:[0,0,0], ticks:[10,10] } )
+  .grid( { axis:[0,2], color:0xa0a0a0, offset:[0,0,0], ticks:[10,10] } )
+  .surface( { shaded:true,  domain:[[0,1],[0,1]], n:[32,32],
+              expression:surfaceWaves, opacity:.999  } )
+  .surface( { shaded:false, domain:[[0,1],[0,1]], n:[ 2, 2],
+              expression:surfaceSlice, opacity:.5, color:0x20C050 } );
+</code></pre>
+</section>
+
+<section>
+  <section>
+    <h2>The suspence is killing me</h2>
+    <a href="demos/intersections/intersections.html" style="font-size:1.5em; padding:1.5em;">Our Surface Intersection Demo</a>
+  </section>
+</section>
+
+<section>
+  <h2>This Slide Show and</h2>
+  <h2>Demos are at GitHub</h2>
+  <a href="https://github.com/axiom6/MathBox3D">https://github.com/axiom6/MathBox3D</a>
+</section>
+
+<section>
+  <h1>THE END</h1>
+</section>
+
+  </div>
+</div>
+
+<!-- Reveal.js Slide Deck Scripts -->
+<script src="reveal/lib/js/head.min.js"></script>
+<script src="reveal/js/reveal.js"></script>
+
+<script>
+
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize( { controls:true, progress:true, history:true, center:true,
+    theme:      Reveal.getQueryHash().theme,                   // available themes are in /css/theme
+    transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+    dependencies: [                                            // Optional libraries used to extend on reveal.js
+      { src: 'reveal/lib/js/classList.js',          condition: function() { return !document.body.classList; } },
+      { src: 'reveal/plugin/markdown/showdown.js',  condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal/plugin/markdown/markdown.js',  condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal/plugin/zoom-js/zoom.js',       condition: function() { return !!document.body.classList; }, async: true },
+      { src: 'reveal/plugin/notes/notes.js',        condition: function() { return !!document.body.classList; }, async: true },
+      { src: 'reveal/plugin/highlight/highlight.js', callback: function() { hljs.initHighlightingOnLoad();    }, async: true }
+   // { src: 'reveal/plugin/remotes/remotes.js',    condition: function() { return !!document.body.classList; }, async: true }
+    ]
+  });
+
+</script>
+
+</body>
+</html>

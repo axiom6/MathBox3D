@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MathBox - Example: Platonic solids.</title>
+
+  <!--
+    This example shows the platonic solid primitives included. (just a cube for now)
+  -->
+
+  <script type="text/javascript" charset="utf-8" src="../lib/MathBox-bundle.js"></script>
+
+  <script type="text/javascript" charset="utf-8">
+  /**
+   * Bootstrap
+   */
+  DomReady.ready(function() {
+    ThreeBox.preload([
+      'glsl/snippets.glsl.html',
+    ], function () {
+
+      // MathBox boilerplate
+      var mathbox = window.mathbox = mathBox({
+        cameraControls: true,
+        cursor:         true,
+        controlClass:   ThreeBox.OrbitControls,
+        elementResize:  true,
+        fullscreen:     true,
+        screenshot:     true,
+        stats:          false,
+        scale:          1,
+      }).start();
+
+      // Viewport camera/setup
+      mathbox
+        // Cartesian viewport
+        .viewport({
+          type: 'cartesian',
+          range: [[-1, 1], [-1, 1], [-1, 1]],
+          scale: [.6, .6, .6],
+        })
+        .camera({
+          orbit: 3.5,
+          phi: τ/6,
+          theta: 0.3,
+        })
+        .transition(300)
+
+        // Axes
+        .platonic({
+          type: 'cube',
+          color: 0x204090,
+        });
+
+    });
+  });
+  </script>
+
+  <script type="text/javascript" charset="utf-8">
+    DomReady.ready(function () {
+      if (location.href.match(/^file:/)) {
+        //document.getElementById('info').style.opacity = 1;
+        //document.getElementById('info').innerHTML = "Sorry. This example does not work when accessed using file://. Please use an http:// host and try again.";
+      }
+    });
+  </script>
+
+  <style type="text/css" media="screen">
+    html, body { height: 100%; }
+    body { margin: 0; padding: 0 }
+    canvas { display: block }
+
+    #info {
+      position: absolute;
+      left: 50%;
+      bottom: 50px;
+      z-index: 20;
+
+      width: 300px;
+      margin-left: -150px;
+
+      padding: 25px;
+      background: rgba(0, 0, 0, .5);
+      color: #fff;
+
+      font-family: "Lucida Grande", sans-serif;
+      font-size: 16px;
+      text-align: center;
+
+      border-radius: 3px;
+      text-shadow: 0px 1px 0px rgba(0, 0, 0, .4);
+
+      opacity: 0;
+    }
+
+    #info kbd {
+      background: #aaa;
+      box-shadow: 0px 1px 1px rgba(0, 0, 0, .3);
+      border-radius: 3px;
+      padding: 3px;
+      margin: 3px;
+
+      font-family: inherit;
+    }
+  </style>
+
+</head>
+<body>
+  <div id="info"></div>
+</body>
+</html>
